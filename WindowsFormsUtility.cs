@@ -10,6 +10,7 @@ namespace CPUWindowsFormFramework
             lst.DisplayMember = lst.Name.Substring(3);
             if (targetdt != null)
             {
+                lst.DataBindings.Clear();
                 lst.DataBindings.Add("SelectedValue", targetdt, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
             }
         }
@@ -31,10 +32,14 @@ namespace CPUWindowsFormFramework
                 case "dtp":
                     propertyname = "Value";
                     break;
+                case "chb":
+                    propertyname = "Checked";
+                    break;
             }
 
             if (propertyname != "" && columnname != "")
             {
+                ctrl.DataBindings.Clear();
                 ctrl.DataBindings.Add(propertyname, bindsource, columnname, true, DataSourceUpdateMode.OnPropertyChanged);
             }
 
@@ -54,7 +59,7 @@ namespace CPUWindowsFormFramework
             DoFormatGrid(grid, tablename);           
         }
 
-        private static void DoFormatGrid(DataGridView grid, string tablename)
+        private static void DoFormatGrid(DataGridView grid, string tablename)   
         {
             grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             grid.RowHeadersWidth = 25;
@@ -147,7 +152,6 @@ namespace CPUWindowsFormFramework
                 }
             }
         }
-
 
         private static void Btn_Click(object? sender, EventArgs e)
         {
